@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation';
 import React from 'react';
 
+import { WorkoutDetail } from '@/components/workout/workout-detail';
 import {
 	findWorkoutById,
 	findWorkoutItemsByWorkoutId
-} from '@/components/workout/mock-data-service';
-import { WorkoutDetail } from '@/components/workout/workout-detail';
+} from '@/modules/training-plan/server';
+import { getLoggedInUserId } from '@/modules/user/server';
 
 type WorkoutDetailWrapperProps = {
 	workoutId: number;
@@ -15,8 +16,7 @@ export const WorkoutDetailWrapper = async ({
 	workoutId
 }: WorkoutDetailWrapperProps) => {
 	const [userId, workout] = await Promise.all([
-		//getUserId(),
-		1,
+		getLoggedInUserId(),
 		findWorkoutById(workoutId)
 	]);
 

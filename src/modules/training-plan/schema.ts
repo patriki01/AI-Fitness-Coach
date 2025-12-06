@@ -22,7 +22,10 @@ export type TrainingPlan = z.infer<typeof TrainingPlanSchema>;
 export const WorkoutSchema = z.object({
 	id: z.number(),
 	name: z.string(),
-	date: z.string().datetime(),
+	date: z
+		.string()
+		.datetime()
+		.transform(val => new Date(val)),
 	isCompleted: z.boolean(),
 	dateCompleted: z
 		.string()

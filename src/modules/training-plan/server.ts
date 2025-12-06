@@ -9,7 +9,6 @@ import {
 } from '@/modules/training-plan/schema';
 import { trainingPlans, workoutItems, workouts } from '@/db/schema';
 import { db } from '@/db';
-import { sleep } from '@/lib/sleep';
 
 export const createTrainingPlan = async (
 	data: Omit<TrainingPlan, 'id'>

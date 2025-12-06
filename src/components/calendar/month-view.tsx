@@ -5,7 +5,6 @@ import {
 	isSameDay,
 	isSameMonth,
 	isToday,
-	parseISO,
 	startOfMonth,
 	startOfWeek
 } from 'date-fns';
@@ -49,9 +48,7 @@ export const MonthView = ({
 			<div className="grid auto-rows-fr grid-cols-7">
 				{calendarDays.map(dayItem => {
 					// Filter workouts for this specific day
-					const daysWorkouts = workouts.filter(w =>
-						isSameDay(parseISO(w.date), dayItem)
-					);
+					const daysWorkouts = workouts.filter(w => isSameDay(w.date, dayItem));
 
 					return (
 						<CalendarDay

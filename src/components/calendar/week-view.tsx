@@ -6,7 +6,6 @@ import {
 	format,
 	isSameDay,
 	isToday,
-	parseISO,
 	startOfWeek
 } from 'date-fns';
 import Link from 'next/link';
@@ -29,9 +28,7 @@ export const WeekView = ({
 		<div className="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
 			<div className="grid grid-cols-1 divide-y divide-slate-100">
 				{days.map(dayItem => {
-					const daysWorkouts = workouts.filter(w =>
-						isSameDay(parseISO(w.date), dayItem)
-					);
+					const daysWorkouts = workouts.filter(w => isSameDay(w.date, dayItem));
 					const isTodayDate = isToday(dayItem);
 
 					return (

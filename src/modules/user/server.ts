@@ -6,6 +6,12 @@ import { db } from '@/db';
 import { users } from '@/db/schema';
 import { type User, UserSchema } from '@/modules/user/schema';
 
+export const getLoggedInUserId = async (): Promise<number | undefined> => {
+	// TODO: implement
+	const x = 1;
+	return x;
+};
+
 export const createUser = async (data: Omit<User, 'id'>): Promise<User> => {
 	const result = await db
 		.insert(users)

@@ -1,10 +1,15 @@
 import React from 'react';
+import { notFound } from 'next/navigation';
 
-// import { findWorkoutsByUserId } from '@/modules/training-plan/server';
 import { WorkoutCalendar } from '@/components/calendar/workout-calendar';
-import { findWorkoutsByUserId } from '@/components/workout/mock-data-service';
+import { getLoggedInUserId } from '@/modules/user/server';
+import { findWorkoutsByUserId } from '@/modules/training-plan/server';
 
 export const WorkoutCalendarWrapper = async () => {
-	const workouts = await findWorkoutsByUserId(1);
+	const loggerInUserId = await getLoggedInUserId();
+	if (!loggerInUserId) {
+		notFound();
+	}
+	const workouts = await findWorkoutsByUserId(loggerInUserId);
 	return <WorkoutCalendar initialWorkouts={workouts} />;
 };
