@@ -45,31 +45,31 @@ export const signOutAction = async () => {
 export const getLoggedInUser = async () => {
 	const hdrs = await headers();
 
-	const { data, error } = await auth.api.getSession({
+	const session = await auth.api.getSession({
 		headers: hdrs
 	});
 
-	if (error || !data?.user) {
+	if (!session?.user) {
 		return null;
 	}
 
 	return {
-		id: data.user.id,
-		email: data.user.email,
-		name: data.user.name
+		id: session.user.id,
+		email: session.user.email,
+		name: session.user.name
 	};
 };
 
 export const getLoggedInUserId = async () => {
 	const hdrs = await headers();
 
-	const { data, error } = await auth.api.getSession({
+	const session = await auth.api.getSession({
 		headers: hdrs
 	});
 
-	if (error || !data?.user) {
+	if (!session?.user) {
 		return null;
 	}
 
-	return data.user.id;
+	return session.user.id;
 };
