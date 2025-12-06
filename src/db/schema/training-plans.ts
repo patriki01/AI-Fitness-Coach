@@ -1,9 +1,9 @@
 import {
-	sqliteTable,
-	text,
+	index,
 	integer,
 	real,
-	index
+	sqliteTable,
+	text
 } from 'drizzle-orm/sqlite-core';
 import { relations } from 'drizzle-orm';
 
@@ -42,7 +42,7 @@ export const workouts = sqliteTable(
 	{
 		id: integer('id').primaryKey({ autoIncrement: true }),
 		name: text('name').notNull(),
-		date: text('date').notNull(),
+		date: integer('date', { mode: 'timestamp' }).notNull(),
 		isCompleted: integer('is_completed', { mode: 'boolean' }).notNull(),
 		dateCompleted: integer('date_completed', { mode: 'timestamp' }),
 		estimatedDurationMin: integer('estimated_duration_min'),
