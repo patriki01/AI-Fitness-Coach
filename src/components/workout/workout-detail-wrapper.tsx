@@ -26,5 +26,5 @@ export const WorkoutDetailWrapper = async ({
 
 	const items = await findWorkoutItemsByWorkoutId(workoutId);
 
-	return <WorkoutDetail workout={workout} initialItems={items} />;
+	return <WorkoutDetail initialWorkout={workout} initialItems={items} />;
 };

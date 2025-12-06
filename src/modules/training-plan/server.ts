@@ -327,6 +327,17 @@ export const findWorkoutItemsByWorkoutId = async (
 	}));
 };
 
+export const updateWorkoutItems = async (
+	items: WorkoutItem[]
+): Promise<(WorkoutItem | null)[]> => {
+	const updates = items.map(item => {
+		const { id, workoutId, ...data } = item;
+		return updateWorkoutItem(id, data);
+	});
+
+	return Promise.all(updates);
+};
+
 export const updateWorkoutItem = async (
 	id: number,
 	data: Partial<Omit<WorkoutItem, 'id' | 'workoutId'>>

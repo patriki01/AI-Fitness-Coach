@@ -13,8 +13,8 @@ export const TrainingPlanSchema = z.object({
 	endDate: z
 		.string()
 		.datetime()
-		.optional()
-		.transform(val => (val ? new Date(val) : undefined)),
+		.transform(val => (val ? new Date(val) : undefined))
+		.nullish(),
 	userId: z.number()
 });
 export type TrainingPlan = z.infer<typeof TrainingPlanSchema>;
@@ -30,8 +30,8 @@ export const WorkoutSchema = z.object({
 	dateCompleted: z
 		.string()
 		.datetime()
-		.optional()
-		.transform(val => (val ? new Date(val) : undefined)),
+		.transform(val => (val ? new Date(val) : undefined))
+		.nullish(),
 	estimatedDurationMin: z.number().optional(),
 	trainingPlanId: z.number(),
 	userId: z.number()
@@ -50,8 +50,8 @@ export const WorkoutItemSchema = z.object({
 	dateCompleted: z
 		.string()
 		.datetime()
-		.optional()
-		.transform(val => (val ? new Date(val) : undefined)),
+		.transform(val => (val ? new Date(val) : undefined))
+		.nullish(),
 	workoutId: z.number()
 });
 export type WorkoutItem = z.infer<typeof WorkoutItemSchema>;
