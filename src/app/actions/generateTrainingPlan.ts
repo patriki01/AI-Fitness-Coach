@@ -22,6 +22,7 @@ type GeneratedPlan = {
 	workouts: {
 		name: string;
 		day: number;
+		date: string;
 		estimatedDurationMin: number;
 		items: {
 			name: string;
@@ -41,6 +42,8 @@ export const generateTrainingPlan = async (
 	userId: string
 ) => {
 	const workoutsPerWeek = parseWorkoutsPerWeek(values.workoutsPerWeek);
+
+	const today = new Date().toISOString().slice(0, 10);
 
 	const systemPrompt = `
 You are a professional fitness coach and training plan generator.
@@ -75,8 +78,9 @@ The JSON structure must follow this exactly:
 }
 
 Rules:
-- Generate exactly ${workoutsPerWeek} workouts per week
-- Generate for ${values.duration} weeks
+- Generate exactly ${workoutsPerWeek} workouts per week, every week, with no skipped weeks.
+- Workouts must be evenly spaced throughout each week (e.g., for 3 workouts/week: Monday, Wednesday, Friday).
+- Each workout must include a "date" field in ISO 8601 format (YYYY-MM-DD), starting from today (${today}) and continuing for ${values.duration} weeks.
 - Total workouts = ${workoutsPerWeek * values.duration}
 - Respect goal, experience, and equipment
 - Beginner = simple exercises, lighter volume
@@ -94,6 +98,8 @@ Training details:
 - Duration: ${values.duration} weeks
 - Available equipment: ${values.equipment.join(', ')}
 - Notes: ${values.notes ?? 'N/A'}
+
+The plan must have exactly ${workoutsPerWeek} workouts per week, scheduled evenly (e.g., Mon/Wed/Fri for 3 workouts/week). The first workout should be scheduled for today (${today}). Each workout must include a "date" field in ISO 8601 format.
 
 Return only JSON in the exact structure described.
 Name the plan and workouts realistically.
@@ -133,7 +139,7 @@ Name the plan and workouts realistically.
 		for (const workout of data.workouts) {
 			const createdWorkout = await createWorkout({
 				name: workout.name,
-				date: new Date(),
+				date: new Date(workout.date),
 				isCompleted: false,
 				estimatedDurationMin: workout.estimatedDurationMin,
 				trainingPlanId: trainingPlan.id,
