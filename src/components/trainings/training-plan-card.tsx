@@ -48,7 +48,7 @@ export const TrainingPlanCard: React.FC<TrainingPlanCardProps> = ({
 					<span>•</span>
 					<span>{plan.durationWeeks} weeks</span>
 					<span>•</span>
-					<span>{workoutsPerWeek} days/week</span>
+					<span>{Math.floor(workoutsPerWeek)} days/week</span>
 				</div>
 
 				<div className="text-sm font-normal opacity-80">

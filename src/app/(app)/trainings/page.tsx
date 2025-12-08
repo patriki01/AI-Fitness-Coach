@@ -1,16 +1,15 @@
 import Link from 'next/link';
 
-import { TrainingPlanCard } from '@/components/trainings/training-plan-card';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
-import { findTrainingPlansByUserId } from '@/modules/training-plan/server';
+import TrainingsWrapper from '@/components/trainings/trainings-wrapper';
 
 const Page = async () => {
 	const session = await auth.api.getSession({
 		headers: await headers()
 	});
-	const userId = session?.user?.id; // TODO find plans by logged user
-	const usersPlans = await findTrainingPlansByUserId(1);
+	const userId = session?.user?.id!;
+
 	return (
 		<>
 			<div className="mb-6 flex items-center justify-between">
@@ -21,11 +20,7 @@ const Page = async () => {
 					</div>
 				</Link>
 			</div>
-			{usersPlans.map((planData) =>
-				<TrainingPlanCard
-					key={planData.id} plan={planData}
-				/>
-			)}
+			<TrainingsWrapper userId={userId}/>
 		</>
 	);
 };

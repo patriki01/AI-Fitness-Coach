@@ -6,7 +6,7 @@ import {
 import {WorkoutItem } from '@/modules/training-plan/schema';
 
 type ExerciseProps = {
-	workoutId: number;
+	workoutId: string;
 	duration: number;
 }
 
