@@ -7,7 +7,6 @@ import {
 	createWorkout,
 	createWorkoutItem
 } from '@/modules/training-plan/server';
-
 import { type TrainingPlanFormValues } from '@/app/(app)/trainings/new/page';
 
 const client = new OpenAI({
@@ -131,7 +130,7 @@ Name the plan and workouts realistically.
 		for (const workout of data.workouts) {
 			const createdWorkout = await createWorkout({
 				name: workout.name,
-				date: new Date().toISOString(),
+				date: new Date(),
 				isCompleted: false,
 				estimatedDurationMin: workout.estimatedDurationMin,
 				trainingPlanId: trainingPlan.id,
