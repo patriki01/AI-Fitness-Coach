@@ -30,7 +30,7 @@ export const CalendarDay = ({
 			)}
 		</div>
 
-		<div className="mt-1 flex flex-col gap-1">
+		<div className="mt-1 flex max-h-48 flex-col gap-1 overflow-x-auto">
 			{workouts.map(workout => (
 				<WorkoutItem key={workout.id} workout={workout} />
 			))}
