@@ -7,7 +7,7 @@ import {
 	SelectContent,
 	SelectItem
 } from '@/components/ui/select';
-import { type TrainingPlanFormValues } from '@/app/trainings/new/page';
+import { type TrainingPlanFormValues } from '@/app/(app)/trainings/new/page';
 
 export const WorkoutsPerWeekSelect = ({
 	control

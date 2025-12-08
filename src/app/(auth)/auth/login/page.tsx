@@ -1,53 +1,61 @@
 'use client';
 
 import * as React from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-import { signUpAction } from '@/app/actions/auth';
+import { signInAction } from '@/app/actions/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-const SignupPage = () => {
-	const formRef = React.useRef<HTMLFormElement | null>(null);
+const LoginPage: React.FC = () => {
+	const router = useRouter();
+	const searchParams = useSearchParams();
+
 	const [isSubmitting, setIsSubmitting] = React.useState(false);
 	const [error, setError] = React.useState<string | null>(null);
 
-	const formAction = async (formData: FormData) => {
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
 		setError(null);
 		setIsSubmitting(true);
-		try {
-			await signUpAction(formData);
-		} catch (e) {
-			setError('Failed to sign up. Please try again.');
+
+		const formData = new FormData(event.currentTarget);
+		const result = await signInAction(formData);
+
+		if (!result.ok) {
+			setError(result.message);
 			setIsSubmitting(false);
+			return;
 		}
+
+		const redirectTo = searchParams.get('redirectTo') ?? '/';
+		setIsSubmitting(false);
+		router.push(redirectTo);
+	};
+
+	const handleGoToSignup = () => {
+		const redirectTo = searchParams.get('redirectTo');
+		const base = '/auth/signup';
+		const url = redirectTo
+			? `${base}?redirectTo=${encodeURIComponent(redirectTo)}`
+			: base;
+
+		router.push(url);
 	};
 
 	return (
 		<div className="mx-auto max-w-md">
 			<div className="mb-8 rounded-2xl bg-gradient-to-br from-indigo-400 to-purple-600 p-6 text-center text-white shadow-lg">
-				<h2 className="text-2xl font-bold">Create Your Account</h2>
+				<h2 className="text-2xl font-bold">Welcome Back</h2>
 				<p className="text-sm opacity-80">
-					Join your AI-powered fitness journey
+					Log in to continue your fitness journey
 				</p>
 			</div>
 
 			<div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-[0_5px_25px_rgba(0,0,0,0.15)]">
-				<form ref={formRef} action={formAction} className="space-y-6">
-					<div className="space-y-2">
-						<Label htmlFor="name" className="font-semibold text-gray-700">
-							Name
-						</Label>
-						<Input
-							id="name"
-							name="name"
-							type="text"
-							placeholder="John Doe"
-							required
-							className="rounded-xl border-2 border-gray-200 p-3 focus:border-indigo-400"
-						/>
-					</div>
-
+				<form onSubmit={handleSubmit} className="space-y-6">
 					<div className="space-y-2">
 						<Label htmlFor="email" className="font-semibold text-gray-700">
 							Email
@@ -70,11 +78,9 @@ const SignupPage = () => {
 							id="password"
 							name="password"
 							type="password"
-							minLength={6}
 							required
 							className="rounded-xl border-2 border-gray-200 p-3 focus:border-indigo-400"
 						/>
-						<p className="text-xs text-gray-500">Minimum 6 characters.</p>
 					</div>
 
 					{error && (
@@ -88,12 +94,23 @@ const SignupPage = () => {
 						className="w-full rounded-xl bg-gradient-to-br from-indigo-400 to-purple-600 py-6 font-semibold text-white shadow-lg transition hover:opacity-90"
 						disabled={isSubmitting}
 					>
-						{isSubmitting ? 'Signing up...' : 'Sign up'}
+						{isSubmitting ? 'Logging in...' : 'Log in'}
 					</Button>
 				</form>
+
+				<p className="mt-4 text-center text-sm text-gray-600">
+					Don&apos;t have an account yet?{' '}
+					<button
+						type="button"
+						onClick={handleGoToSignup}
+						className="font-semibold text-indigo-600 hover:underline"
+					>
+						Sign up!
+					</button>
+				</p>
 			</div>
 		</div>
 	);
 };
 
-export default SignupPage;
+export default LoginPage;

@@ -8,7 +8,7 @@ import {
 	createWorkoutItem
 } from '@/modules/training-plan/server';
 
-import { type TrainingPlanFormValues } from '../trainings/new/page';
+import { type TrainingPlanFormValues } from '@/app/(app)/trainings/new/page';
 
 const client = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY

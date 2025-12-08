@@ -1,38 +1,49 @@
 'use server';
 
-import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 import { auth } from '@/lib/auth';
 
-export const signUpAction = async (formData: FormData) => {
+type AuthResult = { ok: true } | { ok: false; message: string };
+
+export const signUpAction = async (formData: FormData): Promise<AuthResult> => {
 	const email = formData.get('email') as string;
 	const password = formData.get('password') as string;
 	const name = formData.get('name') as string;
 
-	await auth.api.signUpEmail({
-		body: {
-			email,
-			password,
-			name
-		}
-	});
+	try {
+		await auth.api.signUpEmail({
+			body: { email, password, name }
+		});
 
-	redirect('/');
+		return { ok: true };
+	} catch (error) {
+		const message =
+			error instanceof Error
+				? error.message
+				: 'Failed to sign up. Please try again.';
+		return { ok: false, message };
+	}
 };
 
-export const signInAction = async (formData: FormData) => {
+export const signInAction = async (formData: FormData): Promise<AuthResult> => {
 	const email = formData.get('email') as string;
 	const password = formData.get('password') as string;
 
-	await auth.api.signInEmail({
-		body: {
-			email,
-			password
-		}
-	});
+	try {
+		await auth.api.signInEmail({
+			body: { email, password }
+		});
 
-	redirect('/');
+		return { ok: true };
+	} catch (error) {
+		const message =
+			error instanceof Error
+				? error.message
+				: 'Invalid credentials. Please try again.';
+		return { ok: false, message };
+	}
 };
 
 export const signOutAction = async () => {

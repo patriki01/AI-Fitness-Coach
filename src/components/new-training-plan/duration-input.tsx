@@ -1,6 +1,6 @@
 import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 
-import { type TrainingPlanFormValues } from '@/app/trainings/new/page';
+import { type TrainingPlanFormValues } from '@/app/(app)/trainings/new/page';
 import { Input } from '@/components/ui/input';
 
 export const DurationInput = ({

@@ -1,7 +1,7 @@
 import { type UseFormSetValue } from 'react-hook-form';
 
 import { cn } from '@/lib/utils';
-import { type TrainingPlanFormValues } from '@/app/trainings/new/page';
+import { type TrainingPlanFormValues } from '@/app/(app)/trainings/new/page';
 
 const goals = [
 	{ label: 'Fat Burning', value: 'fat-burning', icon: '🔥' },

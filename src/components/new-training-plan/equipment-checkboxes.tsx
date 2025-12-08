@@ -1,7 +1,7 @@
 import { type Control, Controller } from 'react-hook-form';
 
 import { Checkbox } from '@/components/ui/checkbox';
-import { type TrainingPlanFormValues } from '@/app/trainings/new/page';
+import { type TrainingPlanFormValues } from '@/app/(app)/trainings/new/page';
 
 const equipmentOptions = [
 	{ label: 'Dumbbells', value: 'dumbbells' },
