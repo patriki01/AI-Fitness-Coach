@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui';
 import { getLoggedInUser, signOutAction } from '@/app/actions/auth';
 
 const ProfilePage = async () => {

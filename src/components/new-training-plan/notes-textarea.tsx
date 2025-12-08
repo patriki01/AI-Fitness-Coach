@@ -1,7 +1,7 @@
 import { type UseFormRegister } from 'react-hook-form';
 
 import { type TrainingPlanFormValues } from '@/app/(app)/trainings/new/page';
-import { Textarea } from '@/components/ui/textarea';
+import { Textarea } from '@/components/ui';
 
 export const NotesTextarea = ({
 	register

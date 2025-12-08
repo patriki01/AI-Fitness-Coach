@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 
-import { Button } from '@/components/common';
+import { Button } from '@/components/ui';
 
 export const CalendarHeader = ({
 	currentDate,

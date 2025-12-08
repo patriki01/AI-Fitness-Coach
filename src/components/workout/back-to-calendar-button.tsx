@@ -2,7 +2,7 @@ import { ChevronLeft } from 'lucide-react';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@/components/common';
+import { Button } from '@/components/ui';
 
 export const BackToCalendarButton = () => {
 	const router = useRouter();

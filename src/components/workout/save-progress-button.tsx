@@ -1,7 +1,7 @@
 import { Save } from 'lucide-react';
 import React from 'react';
 
-import { Button } from '@/components/common';
+import { Button } from '@/components/ui';
 
 type SaveProgressButtonProps = {
 	handleSave: () => void;

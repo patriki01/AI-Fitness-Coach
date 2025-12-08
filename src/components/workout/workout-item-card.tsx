@@ -1,8 +1,8 @@
 import { CheckSquare, Dumbbell, Square, Timer } from 'lucide-react';
 import React from 'react';
 
-import { Card } from '@/components/common';
 import type { WorkoutItem } from '@/modules/training-plan/schema';
+import { Card } from '@/components/ui';
 
 type WorkoutItemCardProps = {
 	item: WorkoutItem;

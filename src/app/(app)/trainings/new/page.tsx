@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui';
 import { PlanNameInput } from '@/components/new-training-plan/plan-name-input';
 import { GoalSelector } from '@/components/new-training-plan/goal-selector';
 import { DurationInput } from '@/components/new-training-plan/duration-input';

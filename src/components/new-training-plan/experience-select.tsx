@@ -6,7 +6,7 @@ import {
 	SelectValue,
 	SelectContent,
 	SelectItem
-} from '@/components/ui/select';
+} from '@/components/ui';
 import { type TrainingPlanFormValues } from '@/app/(app)/trainings/new/page';
 
 export const ExperienceSelect = ({

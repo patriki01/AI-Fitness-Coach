@@ -10,8 +10,8 @@ import {
 } from 'date-fns';
 import Link from 'next/link';
 
-import { Badge } from '@/components/common';
 import { type Workout } from '@/modules/training-plan/schema';
+import { Badge } from '@/components/ui';
 
 export const WeekView = ({
 	currentDate,

@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
 import React from 'react';
 
-import { Badge } from '@/components/common';
 import { type Workout } from '@/modules/training-plan/schema';
+import { Badge } from '@/components/ui';
 
 type WorkoutHeaderProps = {
 	workout: Workout;
