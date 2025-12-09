@@ -1,5 +1,4 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { headers } from 'next/headers';
 
 import { auth } from '@/lib/auth';
 
@@ -16,9 +15,15 @@ export const middleware = async (request: NextRequest) => {
 		return NextResponse.next();
 	}
 
-	const session = await auth.api.getSession({
-		headers: await headers()
-	});
+	let session: unknown;
+	try {
+		session = await auth.api.getSession({
+			headers: request.headers
+		});
+	} catch (err) {
+		console.error('Failed to get session in middleware:', err);
+		session = null;
+	}
 
 	const isLoggedIn = Boolean(session);
 	const isAuthRoute = AUTH_ROUTES.includes(pathname);
