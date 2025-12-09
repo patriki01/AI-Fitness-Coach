@@ -15,7 +15,6 @@ const client = new OpenAI({
 
 type GeneratedPlan = {
 	plan: {
-		name: string;
 		description: string;
 		durationWeeks: number;
 	};
@@ -53,7 +52,6 @@ The JSON structure must follow this exactly:
 
 {
   "plan": {
-    "name": string,
     "description": string,
     "durationWeeks": number
   },
@@ -102,7 +100,7 @@ Training details:
 The plan must have exactly ${workoutsPerWeek} workouts per week, scheduled evenly (e.g., Mon/Wed/Fri for 3 workouts/week). The first workout should be scheduled for today (${today}). Each workout must include a "date" field in ISO 8601 format.
 
 Return only JSON in the exact structure described.
-Name the plan and workouts realistically.
+Name workouts realistically.
 `;
 
 	try {
@@ -124,7 +122,7 @@ Name the plan and workouts realistically.
 		const data: GeneratedPlan = JSON.parse(content);
 
 		const trainingPlan = await createTrainingPlan({
-			name: data.plan.name,
+			name: values.name,
 			description: data.plan.description,
 			durationWeeks: data.plan.durationWeeks,
 			isActive: true,
