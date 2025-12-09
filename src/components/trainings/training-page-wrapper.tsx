@@ -7,6 +7,8 @@ import {
 } from '@/modules/training-plan/server';
 import { WeekSeparator } from '@/components/trainings/week-separator';
 import { WorkoutListItem } from '@/components/trainings/workout-list-item';
+import { differenceInCalendarDays } from 'date-fns';
+import { calculateFrequency } from '@/components/trainings/training-plan-card';
 
 type TrainingPlanProps = {
 	planId: string;
@@ -40,16 +42,15 @@ const TrainingPageWrapper = ({ planId }: TrainingPlanProps) => {
 	return (
 		<>
 			<h2 className="mb-8 text-3xl font-bold">{plan?.name}</h2>
+			<p>{plan?.description}</p>
 			{workouts.map((workout, index) => {
-				const workoutsPerWeek = Math.floor(workouts.length / plan?.durationWeeks!);
-				const isNewWeek = index % workoutsPerWeek === 0;
-				const currentWeek = Math.floor(index / workoutsPerWeek) + 1;
+				const workoutsPerWeek = calculateFrequency(workouts);
 				let separator = null;
-				if (isNewWeek) {
+				if (index % workoutsPerWeek === 0) {
 					separator = (
 						<WeekSeparator
 							key={`separator-${index}`}
-							label={`Week ${currentWeek}`}
+							label={`Week ${Math.floor(index / workoutsPerWeek) + 1}`}
 						/>
 					);
 				}

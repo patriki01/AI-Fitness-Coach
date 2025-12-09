@@ -26,6 +26,7 @@ export const WorkoutListItem: React.FC<WorkoutListItemProps> = ({
 					key={workout.id}
 					workoutId={workout.id}
 					duration={workout.estimatedDurationMin!}
+					date={workout.date}
 				/>
 			</div>
 
