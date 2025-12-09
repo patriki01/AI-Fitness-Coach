@@ -24,7 +24,7 @@ export type TrainingPlanFormValues = {
 	notes: string;
 };
 
-const Page = () => {
+const NewTrainingPage = () => {
 	const {
 		register,
 		handleSubmit,
@@ -106,4 +106,4 @@ const Page = () => {
 	);
 };
 
-export default Page;
+export default NewTrainingPage;

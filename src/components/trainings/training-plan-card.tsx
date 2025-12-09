@@ -1,5 +1,3 @@
-'use client';
-import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { differenceInCalendarDays, differenceInCalendarWeeks } from 'date-fns';
 
@@ -11,14 +9,10 @@ import { findWorkoutsByTrainingPlanId } from '@/modules/training-plan/server';
 
 type TrainingPlanCardProps = {
 	plan: TrainingPlan;
-	className?: string;
 };
 
-export const TrainingPlanCard: React.FC<TrainingPlanCardProps> = ({
-	plan,
-	className = ''
-}) => {
-	const [workouts, setWorkouts] = useState<Workout[]>([]);
+export const TrainingPlanCard = async ({ plan }: TrainingPlanCardProps) => {
+	const workouts = await findWorkoutsByTrainingPlanId(plan.id);
 
 	const calculateCurrentWeek = () => {
 		const start = new Date(plan.startDate);
@@ -31,18 +25,12 @@ export const TrainingPlanCard: React.FC<TrainingPlanCardProps> = ({
 		return Math.min(weekDiff, plan.durationWeeks);
 	};
 
-	useEffect(() => {
-		findWorkoutsByTrainingPlanId(plan.id).then((value: Workout[]) => {
-			setWorkouts(value);
-		});
-	}, [plan.id]);
 	const currentWeek = calculateCurrentWeek();
 	const completed = workouts.filter(value => value.isCompleted);
 	const workoutsPerWeek = calculateFrequency(workouts);
+
 	return (
-		<div
-			className={`relative mb-8 w-full overflow-hidden rounded-2xl bg-gradient-to-r from-[#5b73e8] to-[#7b52b9] p-6 text-white shadow-lg transition duration-300 hover:from-yellow-400 hover:to-yellow-400 hover:text-black ${className} `}
-		>
+		<div className="relative mb-8 w-full overflow-hidden rounded-2xl bg-gradient-to-r from-[#5b73e8] to-[#7b52b9] p-6 text-white shadow-lg transition duration-300 hover:from-yellow-400 hover:to-yellow-400 hover:text-black">
 			<Link className="hover:bg-sky-700" href={`/trainings/${plan.id}`}>
 				<h3 className="mb-2 text-2xl font-bold tracking-tight">{plan.name}</h3>
 
@@ -66,14 +54,15 @@ export const TrainingPlanCard: React.FC<TrainingPlanCardProps> = ({
 };
 
 export const calculateFrequency = (ws: Workout[]) => {
-	if (ws.length < 7) return 0;
+	if (!ws || ws.length === 0) return 0;
+	const checkLimit = Math.min(ws.length, 7);
+
 	let frequency = 0;
-	for (let i = 0; i < 7; i++) {
+	for (let i = 0; i < checkLimit; i++) {
 		if (differenceInCalendarDays(ws[i].date, ws[0].date) <= 6) {
 			frequency++;
 		}
 	}
-	console.log(ws[0]);
-	console.log(frequency);
+
 	return frequency;
 };
