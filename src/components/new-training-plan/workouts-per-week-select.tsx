@@ -30,7 +30,6 @@ export const WorkoutsPerWeekSelect = ({
 						<SelectValue placeholder="Select frequency" />
 					</SelectTrigger>
 					<SelectContent>
-						<SelectItem value="2 days">2 days</SelectItem>
 						<SelectItem value="3 days">3 days</SelectItem>
 						<SelectItem value="4 days">4 days</SelectItem>
 						<SelectItem value="5 days">5 days</SelectItem>
