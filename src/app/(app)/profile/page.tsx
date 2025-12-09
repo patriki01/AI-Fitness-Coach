@@ -1,6 +1,7 @@
+import { Suspense } from 'react';
+
 import { Button } from '@/components/ui';
 import { getLoggedInUser, signOutAction } from '@/app/actions/auth';
-import { Suspense } from 'react';
 import UserStatsSkeleton from '@/components/profile/user-stats-skeleton';
 import UserStatsSection from '@/components/profile/user-stats-section';
 

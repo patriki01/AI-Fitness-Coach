@@ -1,7 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+
 import { findWorkoutItemsByWorkoutId } from '@/modules/training-plan/server';
-import { WorkoutItem } from '@/modules/training-plan/schema';
+import { type WorkoutItem } from '@/modules/training-plan/schema';
 
 type ExerciseProps = {
 	workoutId: string;
@@ -16,11 +17,12 @@ const ExerciseCount = ({ workoutId, duration, date }: ExerciseProps) => {
 		findWorkoutItemsByWorkoutId(workoutId).then((items: WorkoutItem[]) =>
 			setItems(items)
 		);
-	}, []);
+	}, [workoutId]);
 	return (
 		<p className="mt-0.5 text-sm text-gray-500">
-			{date.toDateString()} &bull; {items?.length} {items?.length === 1 ? 'exercise' : 'exercises'}{' '}
-			&bull; {duration || '--'} min
+			{date.toDateString()} &bull; {items?.length}{' '}
+			{items?.length === 1 ? 'exercise' : 'exercises'} &bull; {duration || '--'}{' '}
+			min
 		</p>
 	);
 };

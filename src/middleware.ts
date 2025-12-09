@@ -1,7 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
-import { auth } from '@/lib/auth';
-
 const AUTH_ROUTES = ['/auth/login', '/auth/signup'];
 
 export const middleware = async (request: NextRequest) => {
@@ -15,17 +13,15 @@ export const middleware = async (request: NextRequest) => {
 		return NextResponse.next();
 	}
 
-	let session: unknown;
+	let sessionCookie: unknown;
 	try {
-		session = await auth.api.getSession({
-			headers: request.headers
-		});
+		sessionCookie = request.cookies.get('better-auth.session_token');
 	} catch (err) {
 		console.error('Failed to get session in middleware:', err);
-		session = null;
+		sessionCookie = null;
 	}
 
-	const isLoggedIn = Boolean(session);
+	const isLoggedIn = Boolean(sessionCookie);
 	const isAuthRoute = AUTH_ROUTES.includes(pathname);
 
 	if (isLoggedIn && isAuthRoute) {

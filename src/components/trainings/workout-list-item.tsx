@@ -1,8 +1,8 @@
 import React from 'react';
+import Link from 'next/link';
 
 import { type Workout } from '@/modules/training-plan/schema';
 import ExerciseCount from '@/components/trainings/exercise-count';
-import Link from "next/link";
 
 type WorkoutListItemProps = {
 	workout: Workout;

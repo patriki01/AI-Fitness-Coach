@@ -6,9 +6,7 @@ type TrainingPageProps = {
 
 const Page = async ({ params }: TrainingPageProps) => {
 	const { id } = await params;
-	return (
-		<TrainingPageWrapper planId={id}/>
-	);
+	return <TrainingPageWrapper planId={id} />;
 };
 
 export default Page;

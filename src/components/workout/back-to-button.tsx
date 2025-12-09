@@ -5,25 +5,25 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui';
 
 type BackToProps = {
-	type: "workout" | "calendar";
+	type: 'workout' | 'calendar';
 	trainingId: string;
-}
+};
 
 const TYPE = {
-	"calendar": {
-		text: "Back to Calendar",
-		route: "/calendar",
+	calendar: {
+		text: 'Back to Calendar',
+		route: '/calendar'
 	},
-	"workout": {
-		text: "Back to Training",
-		route: "/trainings",
+	workout: {
+		text: 'Back to Training',
+		route: '/trainings'
 	}
-}
+};
 
-export const BackToButton = ({type, trainingId}: BackToProps) => {
+export const BackToButton = ({ type, trainingId }: BackToProps) => {
 	const router = useRouter();
 	const config = TYPE[type];
-	const route = type === "workout" ? "/trainings/" + trainingId : "/calendar";
+	const route = type === 'workout' ? `/trainings/${trainingId}` : '/calendar';
 	return (
 		<div className="flex items-center justify-between">
 			<Button

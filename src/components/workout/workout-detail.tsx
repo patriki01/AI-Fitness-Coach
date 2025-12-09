@@ -15,8 +15,7 @@ import {
 type WorkoutDetailClientProps = {
 	initialWorkout: Workout;
 	initialItems: WorkoutItem[];
-	backTo: "calendar" | "workout";
-
+	backTo: 'calendar' | 'workout';
 };
 
 export const WorkoutDetail = ({

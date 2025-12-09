@@ -1,6 +1,10 @@
-"use client";
+'use client';
 import React, { useEffect, useState } from 'react';
-import { TrainingPlan, Workout } from '@/modules/training-plan/schema';
+
+import {
+	type TrainingPlan,
+	type Workout
+} from '@/modules/training-plan/schema';
 import {
 	findTrainingPlanById,
 	findWorkoutsByTrainingPlanId
@@ -12,7 +16,7 @@ import { TrainingPageSkeleton } from '@/components/trainings/training-page-skele
 
 type TrainingPlanProps = {
 	planId: string;
-}
+};
 
 const TrainingPageWrapper = ({ planId }: TrainingPlanProps) => {
 	const [plan, setPlan] = useState<TrainingPlan>();
@@ -33,13 +37,12 @@ const TrainingPageWrapper = ({ planId }: TrainingPlanProps) => {
 				setWorkouts(workoutsValue || []);
 			})
 			.catch(error => {
-				console.error("Error fetching plan data:", error);
-				throw new Error(error.message || 'Failed to load plan details.');
+				console.error('Error fetching plan data:', error);
+				throw new Error(error.message ?? 'Failed to load plan details.');
 			})
 			.finally(() => {
 				setIsLoading(false);
 			});
-
 	}, [planId]);
 
 	if (isLoading) {

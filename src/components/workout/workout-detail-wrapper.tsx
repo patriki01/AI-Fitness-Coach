@@ -10,7 +10,7 @@ import { getLoggedInUserId } from '@/app/actions/auth';
 
 type WorkoutDetailWrapperProps = {
 	workoutId: string;
-	backTo: "calendar" | "workout";
+	backTo: 'calendar' | 'workout';
 };
 
 export const WorkoutDetailWrapper = async ({

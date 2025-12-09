@@ -14,7 +14,7 @@ const WorkoutPage = async ({ params }: WorkoutPageProps) => {
 		<div className="min-h-screen bg-slate-50/50 p-4 md:p-8">
 			<div className="mx-auto max-w-3xl">
 				<Suspense fallback={<WorkoutDetailSkeleton />}>
-					<WorkoutDetailWrapper workoutId={id} backTo='calendar' />
+					<WorkoutDetailWrapper workoutId={id} backTo="calendar" />
 				</Suspense>
 			</div>
 		</div>

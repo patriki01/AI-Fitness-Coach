@@ -1,12 +1,13 @@
 'use client';
 
 import * as React from 'react';
+import { Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { signUpAction } from '@/app/actions/auth';
 import { Button, Input, Label } from '@/components/ui';
 
-const SignupPage: React.FC = () => {
+const SignupForm: React.FC = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
@@ -44,86 +45,102 @@ const SignupPage: React.FC = () => {
 	};
 
 	return (
-		<div className="mx-auto max-w-md">
-			<div className="mb-8 rounded-2xl bg-gradient-to-br from-indigo-400 to-purple-600 p-6 text-center text-white shadow-lg">
-				<h2 className="text-2xl font-bold">Create your account</h2>
-				<p className="text-sm opacity-80">
-					Join your AI-powered fitness journey
-				</p>
-			</div>
+		<>
+			<form onSubmit={handleSubmit} className="space-y-6">
+				<div className="space-y-2">
+					<Label htmlFor="name" className="font-semibold text-gray-700">
+						Name
+					</Label>
+					<Input
+						id="name"
+						name="name"
+						type="text"
+						placeholder="John Doe"
+						required
+						className="rounded-xl border-2 border-gray-200 p-3 focus:border-indigo-400"
+					/>
+				</div>
 
-			<div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-[0_5px_25px_rgba(0,0,0,0.15)]">
-				<form onSubmit={handleSubmit} className="space-y-6">
-					<div className="space-y-2">
-						<Label htmlFor="name" className="font-semibold text-gray-700">
-							Name
-						</Label>
-						<Input
-							id="name"
-							name="name"
-							type="text"
-							placeholder="John Doe"
-							required
-							className="rounded-xl border-2 border-gray-200 p-3 focus:border-indigo-400"
-						/>
-					</div>
+				<div className="space-y-2">
+					<Label htmlFor="email" className="font-semibold text-gray-700">
+						Email
+					</Label>
+					<Input
+						id="email"
+						name="email"
+						type="email"
+						placeholder="you@example.com"
+						required
+						className="rounded-xl border-2 border-gray-200 p-3 focus:border-indigo-400"
+					/>
+				</div>
 
-					<div className="space-y-2">
-						<Label htmlFor="email" className="font-semibold text-gray-700">
-							Email
-						</Label>
-						<Input
-							id="email"
-							name="email"
-							type="email"
-							placeholder="you@example.com"
-							required
-							className="rounded-xl border-2 border-gray-200 p-3 focus:border-indigo-400"
-						/>
-					</div>
+				<div className="space-y-2">
+					<Label htmlFor="password" className="font-semibold text-gray-700">
+						Password
+					</Label>
+					<Input
+						id="password"
+						name="password"
+						type="password"
+						required
+						minLength={8}
+						className="rounded-xl border-2 border-gray-200 p-3 focus:border-indigo-400"
+					/>
+				</div>
 
-					<div className="space-y-2">
-						<Label htmlFor="password" className="font-semibold text-gray-700">
-							Password
-						</Label>
-						<Input
-							id="password"
-							name="password"
-							type="password"
-							required
-							minLength={8}
-							className="rounded-xl border-2 border-gray-200 p-3 focus:border-indigo-400"
-						/>
-					</div>
+				{error && (
+					<p className="text-sm font-medium text-red-600" aria-live="polite">
+						{error}
+					</p>
+				)}
 
-					{error && (
-						<p className="text-sm font-medium text-red-600" aria-live="polite">
-							{error}
-						</p>
-					)}
+				<Button
+					type="submit"
+					className="w-full rounded-xl bg-gradient-to-br from-indigo-400 to-purple-600 py-6 font-semibold text-white shadow-lg transition hover:opacity-90"
+					disabled={isSubmitting}
+				>
+					{isSubmitting ? 'Signing up...' : 'Sign up'}
+				</Button>
+			</form>
 
-					<Button
-						type="submit"
-						className="w-full rounded-xl bg-gradient-to-br from-indigo-400 to-purple-600 py-6 font-semibold text-white shadow-lg transition hover:opacity-90"
-						disabled={isSubmitting}
-					>
-						{isSubmitting ? 'Signing up...' : 'Sign up'}
-					</Button>
-				</form>
-
-				<p className="mt-4 text-center text-sm text-gray-600">
-					Already have an account?{' '}
-					<button
-						type="button"
-						onClick={handleGoToLogin}
-						className="font-semibold text-indigo-600 hover:underline"
-					>
-						Log in!
-					</button>
-				</p>
-			</div>
-		</div>
+			<p className="mt-4 text-center text-sm text-gray-600">
+				Already have an account?{' '}
+				<button
+					type="button"
+					onClick={handleGoToLogin}
+					className="font-semibold text-indigo-600 hover:underline"
+				>
+					Log in!
+				</button>
+			</p>
+		</>
 	);
 };
+
+const SignupPage: React.FC = () => (
+	<div className="mx-auto max-w-md">
+		<div className="mb-8 rounded-2xl bg-gradient-to-br from-indigo-400 to-purple-600 p-6 text-center text-white shadow-lg">
+			<h2 className="text-2xl font-bold">Create your account</h2>
+			<p className="text-sm opacity-80">Join your AI-powered fitness journey</p>
+		</div>
+
+		<div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-[0_5px_25px_rgba(0,0,0,0.15)]">
+			{/* Dynamic Form - Waits for SearchParams */}
+			<Suspense fallback={<SignupFormSkeleton />}>
+				<SignupForm />
+			</Suspense>
+		</div>
+	</div>
+);
+
+const SignupFormSkeleton = () => (
+	<div className="animate-pulse space-y-6">
+		<div className="h-20 rounded-xl bg-gray-100" />
+		<div className="h-20 rounded-xl bg-gray-100" />
+		<div className="h-20 rounded-xl bg-gray-100" />
+		<div className="h-12 rounded-xl bg-gray-200" />
+	</div>
+);
 
 export default SignupPage;

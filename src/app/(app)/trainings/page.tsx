@@ -1,16 +1,15 @@
 import Link from 'next/link';
+import { headers } from 'next/headers';
+import React from 'react';
 
 import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import TrainingsWrapper from '@/components/trainings/trainings-wrapper';
-import React, { Suspense } from 'react';
-import { TrainingPlanCardSkeleton } from '@/components/trainings/training-plan-card-skeleton';
 
 const Page = async () => {
 	const session = await auth.api.getSession({
 		headers: await headers()
 	});
-	const userId = session?.user?.id!;
+	const userId = session?.user?.id;
 
 	return (
 		<>
@@ -22,7 +21,7 @@ const Page = async () => {
 					</div>
 				</Link>
 			</div>
-			<TrainingsWrapper userId={userId} />
+			<TrainingsWrapper userId={userId!} />
 		</>
 	);
 };

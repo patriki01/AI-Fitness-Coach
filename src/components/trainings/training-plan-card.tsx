@@ -1,10 +1,13 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-
-import { type TrainingPlan, Workout } from '@/modules/training-plan/schema';
 import Link from 'next/link';
-import { findWorkoutsByTrainingPlanId } from '@/modules/training-plan/server';
 import { differenceInCalendarDays, differenceInCalendarWeeks } from 'date-fns';
+
+import {
+	type TrainingPlan,
+	type Workout
+} from '@/modules/training-plan/schema';
+import { findWorkoutsByTrainingPlanId } from '@/modules/training-plan/server';
 
 type TrainingPlanCardProps = {
 	plan: TrainingPlan;
@@ -28,12 +31,11 @@ export const TrainingPlanCard: React.FC<TrainingPlanCardProps> = ({
 		return Math.min(weekDiff, plan.durationWeeks);
 	};
 
-
 	useEffect(() => {
 		findWorkoutsByTrainingPlanId(plan.id).then((value: Workout[]) => {
 			setWorkouts(value);
 		});
-	}, []);
+	}, [plan.id]);
 	const currentWeek = calculateCurrentWeek();
 	const completed = workouts.filter(value => value.isCompleted);
 	const workoutsPerWeek = calculateFrequency(workouts);
