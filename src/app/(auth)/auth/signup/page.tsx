@@ -91,6 +91,7 @@ const SignupPage: React.FC = () => {
 							name="password"
 							type="password"
 							required
+							minLength={8}
 							className="rounded-xl border-2 border-gray-200 p-3 focus:border-indigo-400"
 						/>
 					</div>

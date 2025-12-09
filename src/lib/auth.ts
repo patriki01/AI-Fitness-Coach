@@ -9,7 +9,12 @@ export const auth = betterAuth({
 		provider: 'sqlite'
 	}),
 	emailAndPassword: {
-		enabled: true
+		enabled: true,
+		minPasswordLength: 8
+	},
+	session: {
+		expiresIn: 60 * 60 * 24 * 7,
+		updateAge: 60 * 60 * 24
 	},
 	plugins: [nextCookies()]
 });
