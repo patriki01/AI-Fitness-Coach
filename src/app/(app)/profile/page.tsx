@@ -62,32 +62,6 @@ const ProfilePage = async () => {
 							</div>
 						</div>
 					</div>
-
-					<div className="rounded-2xl bg-gray-100 p-8 shadow">
-						<h3 className="mb-4 text-xl font-semibold">Settings</h3>
-
-						<div className="space-y-6">
-							<div className="space-y-2">
-								<label
-									htmlFor="measurement-system"
-									className="font-semibold text-gray-700"
-								>
-									Measurement System
-								</label>
-								<select
-									id="measurement-system"
-									className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 transition outline-none focus:border-indigo-500 focus:ring-indigo-200"
-								>
-									<option>Metric (kg, cm)</option>
-									<option>Imperial (lbs, inches)</option>
-								</select>
-							</div>
-
-							<Button className="bg-gradient-to-br from-indigo-400 to-purple-600 text-white">
-								Save Settings
-							</Button>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
