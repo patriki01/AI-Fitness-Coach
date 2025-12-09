@@ -121,9 +121,6 @@ Name the plan and workouts realistically.
 			throw new Error('No response from OpenAI');
 		}
 
-		//TODO: delete later
-		console.log('OpenAI response:', content);
-
 		const data: GeneratedPlan = JSON.parse(content);
 
 		const trainingPlan = await createTrainingPlan({
