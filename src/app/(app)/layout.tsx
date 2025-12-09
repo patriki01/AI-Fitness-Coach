@@ -15,7 +15,7 @@ const RootLayout = ({
 	<div
 		className={`flex min-h-screen flex-col bg-gray-200 ${poppins.className}`}
 	>
-		<div className="mx-auto max-w-[1200px] overflow-hidden rounded-[20px] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.3)] xl:min-w-[1200px]">
+		<div className="overflow-hidden bg-white xl:min-w-[1200px]">
 			<Header />
 			<main className="container">
 				<Providers>{children}</Providers>
