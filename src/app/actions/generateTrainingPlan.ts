@@ -30,7 +30,6 @@ type GeneratedPlan = {
 			sets: number;
 			reps: number | null;
 			time: number | null;
-			weight: number | null;
 		}[];
 	}[];
 };
@@ -69,8 +68,7 @@ The JSON structure must follow this exactly:
           "type": "volumeBased" | "timeBased",
           "sets": number,
           "reps": number | null,
-          "time": number | null,
-          "weight": number | null
+          "time": number | null
         }
       ]
     }
@@ -150,7 +148,6 @@ Name the plan and workouts realistically.
 					sets: item.sets,
 					reps: item.reps ?? undefined,
 					time: item.time ?? undefined,
-					weight: item.weight ?? undefined,
 					isCompleted: false,
 					workoutId: createdWorkout.id,
 					dateCompleted: undefined

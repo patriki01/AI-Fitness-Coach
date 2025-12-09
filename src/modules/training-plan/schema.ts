@@ -45,7 +45,6 @@ export const WorkoutItemSchema = z.object({
 	sets: z.number(),
 	time: z.number().optional(),
 	reps: z.number().optional(),
-	weight: z.number().optional(),
 	isCompleted: z.boolean(),
 	dateCompleted: z
 		.string()

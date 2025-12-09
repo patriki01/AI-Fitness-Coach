@@ -81,7 +81,6 @@ export const workoutItems = sqliteTable(
 		sets: integer('sets').notNull(),
 		time: real('time'),
 		reps: integer('reps'),
-		weight: real('weight'),
 		isCompleted: integer('is_completed', { mode: 'boolean' }).notNull(),
 		dateCompleted: integer('date_completed', { mode: 'timestamp' }),
 		workoutId: text('workout_id')

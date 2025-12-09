@@ -260,7 +260,6 @@ export const createWorkoutItem = async (
 			sets: data.sets,
 			time: data.time ?? null,
 			reps: data.reps ?? null,
-			weight: data.weight ?? null,
 			isCompleted: data.isCompleted,
 			dateCompleted: data.dateCompleted ?? null,
 			workoutId: data.workoutId
@@ -273,7 +272,6 @@ export const createWorkoutItem = async (
 		isCompleted: Boolean(result.isCompleted),
 		time: result.time ?? undefined,
 		reps: result.reps ?? undefined,
-		weight: result.weight ?? undefined,
 		dateCompleted: result.dateCompleted ?? undefined
 	};
 };
@@ -294,7 +292,6 @@ export const findWorkoutItemById = async (
 		isCompleted: Boolean(result.isCompleted),
 		time: result.time ?? undefined,
 		reps: result.reps ?? undefined,
-		weight: result.weight ?? undefined,
 		dateCompleted: result.dateCompleted ?? undefined
 	};
 };
@@ -308,7 +305,6 @@ export const findAllWorkoutItems = async (): Promise<WorkoutItem[]> => {
 		isCompleted: Boolean(result.isCompleted),
 		time: result.time ?? undefined,
 		reps: result.reps ?? undefined,
-		weight: result.weight ?? undefined,
 		dateCompleted: result.dateCompleted ?? undefined
 	}));
 };
@@ -327,7 +323,6 @@ export const findWorkoutItemsByWorkoutId = async (
 		isCompleted: Boolean(result.isCompleted),
 		time: result.time ?? undefined,
 		reps: result.reps ?? undefined,
-		weight: result.weight ?? undefined,
 		dateCompleted: result.dateCompleted ?? undefined
 	}));
 };
@@ -354,7 +349,6 @@ export const updateWorkoutItem = async (
 	if (data.sets !== undefined) updateData.sets = data.sets;
 	if (data.time !== undefined) updateData.time = data.time ?? null;
 	if (data.reps !== undefined) updateData.reps = data.reps ?? null;
-	if (data.weight !== undefined) updateData.weight = data.weight ?? null;
 	if (data.isCompleted !== undefined) updateData.isCompleted = data.isCompleted;
 	if (data.dateCompleted !== undefined)
 		updateData.dateCompleted = data.dateCompleted ?? null;
@@ -373,7 +367,6 @@ export const updateWorkoutItem = async (
 		isCompleted: Boolean(result.isCompleted),
 		time: result.time ?? undefined,
 		reps: result.reps ?? undefined,
-		weight: result.weight ?? undefined,
 		dateCompleted: result.dateCompleted ?? undefined
 	};
 };

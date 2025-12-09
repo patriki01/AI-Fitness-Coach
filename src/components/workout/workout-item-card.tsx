@@ -40,12 +40,9 @@ export const WorkoutItemCard = ({
 							{item.sets} {item.sets === 1 ? 'set' : 'sets'}
 						</span>
 						{item.type === 'volumeBased' && (
-							<>
-								<span>
-									{item.reps} {item.reps === 1 ? 'rep' : 'reps'}
-								</span>
-								{item.weight !== undefined && <span>{item.weight} kg</span>}
-							</>
+							<span>
+								{item.reps} {item.reps === 1 ? 'rep' : 'reps'}
+							</span>
 						)}
 						{item.type === 'timeBased' && <span>{item.time} sec</span>}
 					</div>
