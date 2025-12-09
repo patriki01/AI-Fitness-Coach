@@ -44,7 +44,7 @@ export const WorkoutItemCard = ({
 								{item.reps} {item.reps === 1 ? 'rep' : 'reps'}
 							</span>
 						)}
-						{item.type === 'timeBased' && <span>{item.time} sec</span>}
+						{item.type === 'timeBased' && <span>{item.time} min</span>}
 					</div>
 				</div>
 			</div>

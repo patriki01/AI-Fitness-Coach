@@ -61,6 +61,7 @@ The JSON structure must follow this exactly:
     {
       "name": string,
       "day": number,
+      "date": string,
       "estimatedDurationMin": number,
       "items": [
         {
@@ -68,7 +69,7 @@ The JSON structure must follow this exactly:
           "type": "volumeBased" | "timeBased",
           "sets": number,
           "reps": number | null,
-          "time": number | null
+          "time": number | null, // For timeBased, must be in minutes
         }
       ]
     }
@@ -80,6 +81,7 @@ Rules:
 - Workouts must be evenly spaced throughout each week (e.g., for 3 workouts/week: Monday, Wednesday, Friday).
 - Each workout must include a "date" field in ISO 8601 format (YYYY-MM-DD), starting from today (${today}) and continuing for ${values.duration} weeks.
 - Total workouts = ${workoutsPerWeek * values.duration}
+- For every workout item with "type": "timeBased", the "time" field must be the duration in minutes (number).
 - Respect goal, experience, and equipment
 - Beginner = simple exercises, lighter volume
 - Do not include medical warnings or disclaimers
