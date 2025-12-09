@@ -6,7 +6,7 @@ import { Card } from '@/components/ui';
 
 type WorkoutItemCardProps = {
 	item: WorkoutItem;
-	handleToggleItem: (itemId: number) => void;
+	handleToggleItem: (itemId: string) => void;
 };
 
 export const WorkoutItemCard = ({

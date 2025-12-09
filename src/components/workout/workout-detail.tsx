@@ -3,7 +3,7 @@
 import React, { useState, useTransition } from 'react';
 
 import { type Workout, type WorkoutItem } from '@/modules/training-plan/schema';
-import { BackToCalendarButton } from '@/components/workout/back-to-calendar-button';
+import { BackToButton } from '@/components/workout/back-to-button';
 import { WorkoutHeader } from '@/components/workout/workout-header';
 import { WorkoutItemCard } from '@/components/workout/workout-item-card';
 import { SaveProgressButton } from '@/components/workout/save-progress-button';
@@ -15,17 +15,20 @@ import {
 type WorkoutDetailClientProps = {
 	initialWorkout: Workout;
 	initialItems: WorkoutItem[];
+	backTo: "calendar" | "workout";
+
 };
 
 export const WorkoutDetail = ({
 	initialWorkout,
-	initialItems
+	initialItems,
+	backTo
 }: WorkoutDetailClientProps) => {
 	const [workout, setWorkout] = useState<Workout>(initialWorkout);
 	const [items, setItems] = useState<WorkoutItem[]>(initialItems);
 	const [isPending, startTransition] = useTransition();
 
-	const handleToggleItem = (itemId: number) => {
+	const handleToggleItem = (itemId: string) => {
 		setItems(prev =>
 			prev.map(item => {
 				if (item.id !== itemId) return item;
@@ -57,7 +60,7 @@ export const WorkoutDetail = ({
 
 	return (
 		<div className="animate-in fade-in space-y-6 duration-500">
-			<BackToCalendarButton />
+			<BackToButton type={backTo} trainingId={workout.trainingPlanId} />
 			<WorkoutHeader workout={workout} />
 
 			<div className="grid gap-4">

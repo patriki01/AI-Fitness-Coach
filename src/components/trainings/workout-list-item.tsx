@@ -2,6 +2,7 @@ import React from 'react';
 
 import { type Workout } from '@/modules/training-plan/schema';
 import ExerciseCount from '@/components/trainings/exercise-count';
+import Link from "next/link";
 
 type WorkoutListItemProps = {
 	workout: Workout;
@@ -11,14 +12,13 @@ export const WorkoutListItem: React.FC<WorkoutListItemProps> = ({
 	workout
 }) => {
 	const { name, isCompleted } = workout;
-	const statusText = isCompleted ? 'Completed' : 'Pending';
 	const statusColor = isCompleted ? 'text-green-600' : 'text-gray-500';
 	const borderColor = isCompleted ? 'border-green-500' : 'border-indigo-400';
 
 	return (
-		<div
+		<Link
 			className={`flex items-center justify-between rounded-lg border-l-4 bg-white p-4 shadow-sm ${borderColor} my-2 transition-shadow duration-200 hover:shadow-md`}
-			role="button"
+			href={`/workout/${workout.id}`}
 		>
 			<div>
 				<h3 className="text-lg font-semibold text-gray-800">{name}</h3>
@@ -26,6 +26,7 @@ export const WorkoutListItem: React.FC<WorkoutListItemProps> = ({
 					key={workout.id}
 					workoutId={workout.id}
 					duration={workout.estimatedDurationMin!}
+					date={workout.date}
 				/>
 			</div>
 
@@ -47,9 +48,9 @@ export const WorkoutListItem: React.FC<WorkoutListItemProps> = ({
 					</svg>
 				)}
 				<span className={`text-sm font-medium ${statusColor}`}>
-					{statusText}
+					{isCompleted ? 'Completed' : 'Pending'}
 				</span>
 			</div>
-		</div>
+		</Link>
 	);
 };

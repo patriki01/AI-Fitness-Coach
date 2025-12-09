@@ -10,10 +10,12 @@ import { getLoggedInUserId } from '@/app/actions/auth';
 
 type WorkoutDetailWrapperProps = {
 	workoutId: string;
+	backTo: "calendar" | "workout";
 };
 
 export const WorkoutDetailWrapper = async ({
-	workoutId
+	workoutId,
+	backTo
 }: WorkoutDetailWrapperProps) => {
 	const [userId, workout] = await Promise.all([
 		getLoggedInUserId(),
@@ -26,5 +28,11 @@ export const WorkoutDetailWrapper = async ({
 
 	const items = await findWorkoutItemsByWorkoutId(workoutId);
 
-	return <WorkoutDetail initialWorkout={workout} initialItems={items} />;
+	return (
+		<WorkoutDetail
+			initialWorkout={workout}
+			initialItems={items}
+			backTo={backTo}
+		/>
+	);
 };

@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import TrainingsWrapper from '@/components/trainings/trainings-wrapper';
+import React, { Suspense } from 'react';
+import { TrainingPlanCardSkeleton } from '@/components/trainings/training-plan-card-skeleton';
 
 const Page = async () => {
 	const session = await auth.api.getSession({
