@@ -43,7 +43,7 @@ export const Header = () => {
 
 	return (
 		<header className="relative w-full bg-gradient-to-br from-indigo-400 to-purple-600 text-white shadow-md">
-			<div className="mx-auto flex h-auto min-h-[70px] w-full max-w-7xl items-center justify-between px-6 py-4">
+			<div className="container flex h-auto min-h-[70px] items-center justify-between px-6 py-4">
 				<Link href="/" className="flex items-center gap-3" onClick={closeMenu}>
 					<div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-purple-600 shadow-sm">
 						<Dumbbell size={20} strokeWidth={2.5} />
