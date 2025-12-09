@@ -16,7 +16,7 @@ const ProfilePage = async () => {
 	}
 
 	return (
-		<div className="space-y-10">
+		<div className="min-h-screen bg-white p-4 md:p-8">
 			<h2 className="mb-6 text-2xl font-bold">Profile & Statistics</h2>
 
 			<div className="grid grid-cols-1 gap-10 md:grid-cols-3">

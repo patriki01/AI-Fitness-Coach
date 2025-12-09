@@ -24,7 +24,7 @@ export const middleware = async (request: NextRequest) => {
 	const isAuthRoute = AUTH_ROUTES.includes(pathname);
 
 	if (isLoggedIn && isAuthRoute) {
-		const redirectTo = searchParams.get('redirectTo') ?? '/profile';
+		const redirectTo = searchParams.get('redirectTo') ?? '/calendar';
 		return NextResponse.redirect(new URL(redirectTo, request.url));
 	}
 
